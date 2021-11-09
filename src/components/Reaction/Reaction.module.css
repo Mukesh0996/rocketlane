@@ -1,0 +1,38 @@
+.addReaction {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid black;
+    border-style: inset;
+    background: #EDEEF0;
+    transition:  background .2s ease;
+}
+
+.addReaction:hover {
+    cursor: pointer;
+    background: #f4f9fd;
+}
+
+.addEmoji {
+    width: 14px;
+    height: 15px;
+}
+.emojiIcons {
+    top: -45px;
+    position: absolute;
+    width: 118px;
+    height: 32px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
+    border-radius: 24px;
+    align-items: center;
+    display: none;
+}
+.addEmoji:focus .emojiIcons {
+    display: flex !important;
+}

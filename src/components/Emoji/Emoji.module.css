@@ -1,0 +1,27 @@
+.emoji {
+    position: absolute;
+    width: 15px;
+    height: 18px;
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;    
+    letter-spacing: 0.0016em;
+    color: #000000;
+}
+
+.emoji:nth-child(1) {
+    left: 15px;
+}
+.emoji:nth-child(2) {
+    left: 50px;
+}
+
+.emoji:nth-child(3) {
+    left: 85px;
+}
+
+.tooltip {
+    display: none;
+}
