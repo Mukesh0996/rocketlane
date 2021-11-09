@@ -11,7 +11,7 @@
     color: #000000;
 }
 
-.emoji:nth-child(1) {
+/* .emoji:nth-child(1) {
     left: 15px;
 }
 .emoji:nth-child(2) {
@@ -20,8 +20,52 @@
 
 .emoji:nth-child(3) {
     left: 85px;
+} */
+
+.emoji:hover {
+    transform: translateY(-5px);
+    font-size: 28px;
+
+}
+/* .emoji:nth-child(1):hover {
+    left: 10px;
+}
+.emoji:nth-child(2):hover {
+    left: 40px;
 }
 
+.emoji:nth-child(3):hover {
+    left: 70px;
+} */
+
 .tooltip {
+    background: black;
+    padding: 2px 8px;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    top: -55px;
+    color: white;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    width: fit-content;
     display: none;
 }
+/* 
+.emoji:nth-child(1):hover> .tooltip{
+   display: flex;
+   right: 1px;
+  
+}
+.emoji:nth-child(2):hover> .tooltip {
+    display: flex;
+    right: 4px;
+}
+
+.emoji:nth-child(3):hover > .tooltip {
+    display: flex;
+    right: 15px;
+} */
