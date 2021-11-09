@@ -1,0 +1,10 @@
+.user {
+    display: flex;
+    align-items: center;
+}
+.userImageContainer {
+    flex-basis: 250px;
+}
+.userImageContainer img {
+    border-radius: 50%;
+}
