@@ -1,15 +1,15 @@
 import styles from './Emoji.module.css';
 
-const Emoji = ({emoji, name, id, leftVal}) => {
+const Emoji = ({emoji, name, addReaction}) => {
 
 
 
-    const addEmojiHandler = (event) => {
-        console.log(emoji, name);
+    const addCLickHandler = () => {
+      addReaction(emoji, name)
     }
     
     return (
-        <div onClick={addEmojiHandler} className={styles.emoji}>{emoji}
+        <div onClick={addCLickHandler} className={styles.emoji}>{emoji}
             <div className={styles.tooltip}>{name}</div>
         </div>
     )
