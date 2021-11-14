@@ -1,11 +1,12 @@
+import React from 'react';
 import styles from './Emoji.module.css';
 
-const Emoji = ({emoji, name, addReaction}) => {
+const Emoji = ({emoji, name, addReaction, id}) => {
 
 
 
     const addCLickHandler = () => {
-      addReaction(emoji, name)
+      addReaction(id)
     }
     
     return (
@@ -16,4 +17,4 @@ const Emoji = ({emoji, name, addReaction}) => {
 
 }
 
-export default Emoji;
+export default React.memo(Emoji);

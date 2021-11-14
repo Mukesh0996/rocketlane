@@ -17,4 +17,4 @@ const User = ({fName, lName, image, user_id}) => {
 
 }
 
-export default User;
+export default React.memo(User);

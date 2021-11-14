@@ -24,7 +24,15 @@ export const Provider = (props) => {
             return {
                 ...state, usersReactions : action.reactions
             }
-        } else if (action.type === "ERROR") {
+        } else if (action.type === "ADD_REACTION") {
+            let reactions = state.usersReactions;
+            reactions = [...reactions, action.reaction]
+            return {
+                ...state, usersReactions: reactions
+            }
+
+        }
+         else if (action.type === "ERROR") {
             return {
                 ...state, error: { message: action.message }
             }
@@ -53,6 +61,10 @@ export const Provider = (props) => {
         appStateDispatcher({type: "USERS_REACTIONS", reactions: responseData});
     }
 
+    const addReaction = (data) => {
+        appStateDispatcher({type: "ADD_REACTION", reaction: data})
+    }
+
 
     let storeContext = {
         users: appState.users,
@@ -60,7 +72,8 @@ export const Provider = (props) => {
         usersReactions: appState.usersReactions,
         getAllUsers,
         getAllReactions,
-        getAllUsersReactions
+        getAllUsersReactions,
+        addReaction
     }
 
     return <StoreContext.Provider value={storeContext}>{props.children}</StoreContext.Provider>
