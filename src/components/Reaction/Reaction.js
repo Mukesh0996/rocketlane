@@ -27,7 +27,7 @@ const Reaction = ({user_id}) => {
     
     const addReactionHandler = (reaction_id, emoji) => {
       let  ReactionObj = {
-        user_id :4,
+        user_id,
         content_id: 1,
         reaction_id
        }
