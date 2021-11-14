@@ -1,0 +1,47 @@
+[debug] [2021-11-14T11:16:09.780Z] ----------------------------------------------------------------------
+[debug] [2021-11-14T11:16:09.782Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2021-11-14T11:16:09.783Z] CLI Version:   9.22.0
+[debug] [2021-11-14T11:16:09.783Z] Platform:      darwin
+[debug] [2021-11-14T11:16:09.783Z] Node Version:  v12.18.2
+[debug] [2021-11-14T11:16:09.784Z] Time:          Sun Nov 14 2021 16:46:09 GMT+0530 (India Standard Time)
+[debug] [2021-11-14T11:16:09.784Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-11-14T11:16:09.846Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-11-14T11:16:09.846Z] > authorizing via signed-in user (mukeshkeerthipati96@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/mukesh-8058/Desktop/rocketlane
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using rocketlane-13678. 
+[debug] [2021-11-14T11:16:22.334Z] > refreshing access token with scopes: []
+[debug] [2021-11-14T11:16:22.334Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-11-14T11:16:22.470Z] <<< HTTP RESPONSE 200 {"date":"Sun, 14 Nov 2021 11:16:22 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"clear","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-14T11:16:22.536Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/rocketlane-13678 [none]
+[debug] [2021-11-14T11:16:22.955Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/rocketlane-13678 200
+[debug] [2021-11-14T11:16:22.955Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/rocketlane-13678 {"projectId":"rocketlane-13678","projectNumber":"1047364633049","displayName":"rocketlane","name":"projects/rocketlane-13678","resources":{"hostingSite":"rocketlane-13678"},"state":"ACTIVE"}
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
