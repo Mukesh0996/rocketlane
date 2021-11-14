@@ -43,12 +43,6 @@ export const Provider = (props) => {
             return {
                 ...state, usersReactions: reactions
             }
-
-        }
-         else if (action.type === "ERROR") {
-            return {
-                ...state, error: { message: action.message }
-            }
         }
         return defaultState;
     }
