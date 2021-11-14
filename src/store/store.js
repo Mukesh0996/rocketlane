@@ -8,7 +8,7 @@ export const StoreContext = React.createContext({users: [], availableReactions: 
 
 export const Provider = (props) => {
 
-    const defaultState = {users: [], availableReactions: [], usersReactions: []};
+    const defaultState = {users: [], availableReactions: [], usersReactions: [], isLoading: false};
 
     const stateReducer = (state, action) => {
 
@@ -31,6 +31,19 @@ export const Provider = (props) => {
                 ...state, usersReactions: reactions
             }
 
+        } else if (action.type === "LOADING") {
+            let loading = state.isLoading;
+            return {
+                ...state, isLoading: !loading
+            }
+        }
+        else if(action.type === "DELETE_REACTION") {
+            let reactions = state.usersReactions;
+            reactions = reactions.filter(reaction => reaction.id !== action.id);
+            return {
+                ...state, usersReactions: reactions
+            }
+
         }
          else if (action.type === "ERROR") {
             return {
@@ -43,37 +56,81 @@ export const Provider = (props) => {
    
 
     const getAllUsers = async () => {
+        appStateDispatcher({type: "LOADING"});
         const response = await fetch("https://artful-iudex.herokuapp.com/users");
         const responseData = await response.json();
-        console.log(response.ok);
-        appStateDispatcher({type:"SET_USERS", users: responseData});
+        if(response.ok) {
+            appStateDispatcher({type:"SET_USERS", users: responseData}); 
+            appStateDispatcher({type: "LOADING"});
+        }
+        
     }
     
     const getAllReactions = async () => {
+        appStateDispatcher({type: "LOADING"});
         const response = await fetch("https://artful-iudex.herokuapp.com/reactions");
         const responseData = await response.json();
-        appStateDispatcher({type:"SET_REACTIONS", reactions: responseData});
+        if(response.ok){
+            appStateDispatcher({type:"SET_REACTIONS", reactions: responseData});
+            appStateDispatcher({type: "LOADING"});
+        }
+       
     }
     
     const getAllUsersReactions = async () => {
+        appStateDispatcher({type: "LOADING"});
         const response = await fetch("https://artful-iudex.herokuapp.com/user_content_reactions");
         const responseData = await response.json();
-        appStateDispatcher({type: "USERS_REACTIONS", reactions: responseData});
+        if(response.ok){
+            appStateDispatcher({type: "USERS_REACTIONS", reactions: responseData});
+            appStateDispatcher({type: "LOADING"});
+        }
+      
     }
 
-    const addReaction = (data) => {
-        appStateDispatcher({type: "ADD_REACTION", reaction: data})
+    const addReaction = async (data) => {
+        appStateDispatcher({type: "LOADING"});
+        const response = await fetch("https://artful-iudex.herokuapp.com/user_content_reactions", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)            
+        });
+        const responseData = await response.json();
+       
+        if(response.ok) {
+            data = {...data, id: responseData.id };
+            appStateDispatcher({type: "ADD_REACTION", reaction: data});
+                appStateDispatcher({type: "LOADING"});
+        }
     }
+    const removeReaction = async (id) => {
+       try {
+        appStateDispatcher({type: "LOADING"});
+        const response = await fetch(`https://artful-iudex.herokuapp.com/user_content_reactions/${id}`, {
+            method: "DELETE"
+        });
+       
+        if(response.ok) {
+            appStateDispatcher({type: "DELETE_REACTION", id: id});
+            appStateDispatcher({type: "LOADING"});            
+        }
 
+       } catch(e) {
+           console.log("error while deleting the reaction");
+       }
+       
+    }
 
     let storeContext = {
+        isLoading: appState.isLoading,
         users: appState.users,
         availableReactions: appState.availableReactions,
         usersReactions: appState.usersReactions,
         getAllUsers,
         getAllReactions,
         getAllUsersReactions,
-        addReaction
+        addReaction,
+        removeReaction
     }
 
     return <StoreContext.Provider value={storeContext}>{props.children}</StoreContext.Provider>

@@ -52,7 +52,7 @@
     justify-content: flex-end;
     padding: 2px 8px;
     position: absolute;
-    width: 150px;
+    width: 155px;
     height: 32px;
     left: 10px;
     top: 101px;    
@@ -72,6 +72,8 @@
     border: 1px solid #FFFFFF;
     border-radius: 100px;
     background: #F4F4F4;
+    margin: .2rem;
+    margin-top: 0rem;
 }
  .reacted {
     background: #EDF5FF;

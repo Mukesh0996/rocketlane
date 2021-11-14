@@ -1,5 +1,4 @@
 import React from 'react';
-import { useCallback } from 'react';
 import { useContext } from 'react/cjs/react.development';
 import { StoreContext } from '../../store/store';
 import Emoji from '../Emoji/Emoji';
@@ -8,34 +7,34 @@ import styles from './Reaction.module.css';
 const Reaction = ({user_id}) => {
 
     let arr = [];
+    const ctx = useContext(StoreContext)
     const { availableReactions, usersReactions, addReaction } = useContext(StoreContext);
     let reactions = usersReactions.filter(userReaction => userReaction.user_id.toString() === user_id.toString());
-
+  
+    let existingReactionIndex = (emoji)=> arr.findIndex(elem => elem.emoji === emoji && elem.user_id === user_id);
     if( reactions.length > 0 ) {
 
         availableReactions.forEach(reaction => {
-    
             let data = reactions.filter(rec=> rec.reaction_id === reaction.id);
-
-              data.forEach(() => {
-                    arr.push({user_id, emoji: reaction.emoji, count: 1});
+                data.forEach((d) => {
+                    arr.push({user_id, emoji: reaction.emoji, count: 1, id: d.id});
               });
-
         });
     }
-    if(arr.length>0) {
-        console.log(arr, user_id);
-
-    }
     
-    const addReactionHandler = (reaction_id) => {
+    const addReactionHandler = (reaction_id, emoji) => {
       let  ReactionObj = {
+        user_id :4,
         content_id: 1,
-        reaction_id,
-        user_id: 4
+        reaction_id
        }
-       console.log( reaction_id, ReactionObj);
-       addReaction(ReactionObj);
+        if(existingReactionIndex(emoji) === -1) {
+            addReaction(ReactionObj);
+        }   else {
+            let id = arr[existingReactionIndex(emoji)].id;
+
+           ctx.removeReaction(id);
+        } 
     };
     
     return (    <React.Fragment>
@@ -48,7 +47,7 @@ const Reaction = ({user_id}) => {
                 </div>
             </div>
             <div className={styles.existing_emojis}>
-            { arr.length > 0 && arr.map((a, index) => <div key={index} className={`${styles.emoji} ${styles.reacted}`}> <span> {a.emoji}</span> <span>. {a.count}</span></div>)}
+            { arr.length > 0 && arr.map((a, index) => <div id={a.id} key={index} className={`${styles.emoji} ${styles.reacted}`}> <span> {a.emoji}</span> <span>. {a.count}</span></div>)}
             </div>
         </React.Fragment>
         )

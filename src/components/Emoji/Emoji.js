@@ -6,7 +6,7 @@ const Emoji = ({emoji, name, addReaction, id}) => {
 
 
     const addCLickHandler = () => {
-      addReaction(id)
+      addReaction(id, emoji)
     }
     
     return (
