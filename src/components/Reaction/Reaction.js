@@ -9,8 +9,10 @@ const Reaction = ({user_id}) => {
     let arr = [];
     const ctx = useContext(StoreContext)
     const { availableReactions, usersReactions, addReaction } = useContext(StoreContext);
-    let reactions = usersReactions.filter(userReaction => userReaction.user_id.toString() === user_id.toString());
-  
+
+    let reactions = usersReactions.filter(userReaction => userReaction.user_id === user_id);
+
+
     let existingReactionIndex = (emoji)=> arr.findIndex(elem => elem.emoji === emoji && elem.user_id === user_id);
     if( reactions.length > 0 ) {
 
