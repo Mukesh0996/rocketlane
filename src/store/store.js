@@ -56,52 +56,76 @@ export const Provider = (props) => {
    
 
     const getAllUsers = async () => {
-        appStateDispatcher({type: "LOADING"});
+        try {
+            appStateDispatcher({type: "LOADING"});
         const response = await fetch("https://artful-iudex.herokuapp.com/users");
         const responseData = await response.json();
         if(response.ok) {
             appStateDispatcher({type:"SET_USERS", users: responseData}); 
             appStateDispatcher({type: "LOADING"});
         }
+            
+        } catch (error) {
+                console.log("error while fetching users");
+        }
         
     }
     
     const getAllReactions = async () => {
-        appStateDispatcher({type: "LOADING"});
+        try {
+            appStateDispatcher({type: "LOADING"});
         const response = await fetch("https://artful-iudex.herokuapp.com/reactions");
         const responseData = await response.json();
         if(response.ok){
             appStateDispatcher({type:"SET_REACTIONS", reactions: responseData});
             appStateDispatcher({type: "LOADING"});
         }
+            
+        } catch (error) {
+            console.log("error while fetching all reactions");
+        }
+        
        
     }
     
     const getAllUsersReactions = async () => {
-        appStateDispatcher({type: "LOADING"});
-        const response = await fetch("https://artful-iudex.herokuapp.com/user_content_reactions");
-        const responseData = await response.json();
-        if(response.ok){
-            appStateDispatcher({type: "USERS_REACTIONS", reactions: responseData});
+        try {
             appStateDispatcher({type: "LOADING"});
+            const response = await fetch("https://artful-iudex.herokuapp.com/user_content_reactions");
+            const responseData = await response.json();
+            if(response.ok){
+                appStateDispatcher({type: "USERS_REACTIONS", reactions: responseData});
+                appStateDispatcher({type: "LOADING"});
+            }
+            
+        } catch (error) {
+            console.log("error while fetching users reactions");
+            
         }
+       
       
     }
 
     const addReaction = async (data) => {
-        appStateDispatcher({type: "LOADING"});
-        const response = await fetch("https://artful-iudex.herokuapp.com/user_content_reactions", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)            
-        });
-        const responseData = await response.json();
-       
-        if(response.ok) {
-            data = {...data, id: responseData.id };
-            appStateDispatcher({type: "ADD_REACTION", reaction: data});
+        try {
+            appStateDispatcher({type: "LOADING"});
+            const response = await fetch("https://artful-iudex.herokuapp.com/user_content_reactions", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)            
+            });
+            const responseData = await response.json();
+           
+            if(response.ok) {
+                data = {...data, id: responseData.id };
+                appStateDispatcher({type: "ADD_REACTION", reaction: data});
                 appStateDispatcher({type: "LOADING"});
+            }
+
+        } catch (e) {
+            console.log("error while adding a reaction")
         }
+       
     }
     const removeReaction = async (id) => {
        try {
