@@ -12,7 +12,8 @@ function App() {
     ctx.getAllReactions();
     ctx.getAllUsersReactions();  
   },[]);
-  
+
+
   return (
     <div className="App">
      { ctx.isLoading && <div className="appLoading"><div></div><div></div> <div></div></div>}

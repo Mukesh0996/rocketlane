@@ -10,9 +10,10 @@ const Emoji = ({emoji, name, addReaction, id}) => {
     }
     
     return (
-        <div onClick={addCLickHandler} className={styles.emoji}>{emoji}
+       
+        <span onClick={addCLickHandler} className={styles.emoji}>{emoji}
             <div className={styles.tooltip}>{name}</div>
-        </div>
+        </span> 
     )
 
 }

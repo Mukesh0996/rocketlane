@@ -12,39 +12,46 @@ export const Provider = (props) => {
 
     const stateReducer = (state, action) => {
 
-        if(action.type === "SET_USERS") {
-            return {
-                ...state, users: action.users
+        switch (action.type) {
+            case "SET_USERS" : {
+                return {
+                    ...state, users: action.users
+                }
             }
-        }  else if(action.type === "SET_REACTIONS") {
-            return {
-                ...state, availableReactions : action.reactions
+            case "USERS_REACTIONS" : {
+                return {
+                    ...state, usersReactions : action.reactions
+                }
             }
-        } else if (action.type === "USERS_REACTIONS") {
-            return {
-                ...state, usersReactions : action.reactions
+            case "SET_REACTIONS" : {
+                return {
+                    ...state, availableReactions : action.reactions
+                }
             }
-        } else if (action.type === "ADD_REACTION") {
-            let reactions = state.usersReactions;
-            reactions = [...reactions, action.reaction]
-            return {
-                ...state, usersReactions: reactions
+            case "ADD_REACTION" : {
+                let reactions = state.usersReactions;
+                reactions = [...reactions, action.reaction]
+                return {
+                    ...state, usersReactions: reactions
+                }
             }
-
-        } else if (action.type === "LOADING") {
-            let loading = state.isLoading;
-            return {
-                ...state, isLoading: !loading
+            case "LOADING" : {
+                let loading = state.isLoading;
+                return {
+                    ...state, isLoading: !loading
+                }
+            }
+            case "DELETE_REACTION" : {
+                let reactions = state.usersReactions;
+                reactions = reactions.filter(reaction => reaction.id !== action.id);
+                return {
+                    ...state, usersReactions: reactions
+                }
+            }
+            default: {
+                return defaultState;
             }
         }
-        else if(action.type === "DELETE_REACTION") {
-            let reactions = state.usersReactions;
-            reactions = reactions.filter(reaction => reaction.id !== action.id);
-            return {
-                ...state, usersReactions: reactions
-            }
-        }
-        return defaultState;
     }
     const [appState, appStateDispatcher ] = useReducer(stateReducer, defaultState);
    
